@@ -1,0 +1,32 @@
+package exam.util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBManager {
+
+	static {
+		//1. JDBC 드라이버 로드
+		try {
+			//1. JDBC 드라이버 로드
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();			
+	}
+	
+	// 연결
+	public Connection getConnetion()
+	{
+		//2. JDBC 연결
+		con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr","hr");
+		
+		Connection con = null;
+		
+		
+		return con;
+		
+	}
+}

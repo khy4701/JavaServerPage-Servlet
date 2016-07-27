@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>입력양식 태그</h1>
+<hr>
+<form action ="test.jsp">
+
+	<input type="submit" value ="회원가입">
+
+</form>
+
+</body>
+</html>

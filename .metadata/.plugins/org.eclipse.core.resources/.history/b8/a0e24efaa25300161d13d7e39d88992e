@@ -1,0 +1,80 @@
+package exam.action;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import exam.dao.ReplyDAO;
+import exam.vo.ReplyVO;
+
+public class ReplyAction implements Action {
+
+	@Override
+	public MovePage execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		ReplyDAO dao = ReplyDAO.getInstance();
+		
+		System.out.println("ReplyAction");
+		
+		String id = request.getParameter("id");
+		String boardNum = request.getParameter("boardNum");
+		String content= request.getParameter("content");
+		
+		System.out.println("id :" + id);
+		System.out.println("boardNum : "+boardNum);
+		System.out.println("content : " +content);
+		
+		//(int num, String id, String content, Date write_date, int board_num) {
+		ReplyVO reply = new ReplyVO();
+		
+		reply.setId(id);
+		reply.setBoard_num(Integer.parseInt(boardNum));
+		reply.setContent(content);
+		
+		int result = 0;
+		
+		try {
+			result = dao.insertReply(reply);
+			
+			/*
+			 * 
+			 * "" : 문자열
+			 * 0 : 정수형
+			 * [ ] : 배열
+			 * {"속성명" : "속성값" } --> 객체
+			 * */
+			
+			List<ReplyVO> arrayList = dao.selectAll(Integer.parseInt(boardNum));
+			JSONArray array = new JSONArray();
+			
+			for(ReplyVO r : arrayList){
+				JSONObject obj = new JSONObject();
+				
+				obj.put("num", r.getNum());
+				obj.put("id", r.getId());
+				obj.put("content", r.getContent());
+				obj.put("write_date", r.getWrite_date());
+				
+				array.add(obj);
+			}
+			
+			System.out.println(array);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		MovePage movePage = new MovePage();
+		
+		
+		
+		return null;
+	}
+}

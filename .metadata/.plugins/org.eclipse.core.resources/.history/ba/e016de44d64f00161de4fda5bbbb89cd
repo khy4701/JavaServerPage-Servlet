@@ -1,0 +1,47 @@
+package exam.action;
+
+import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import exam.dao.MemberDAO;
+
+public class LoginAction implements Action {
+
+	@Override
+	public MovePage execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		System.out.println("LoginAction");
+		
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pwd");
+		
+		MemberDAO dao = MemberDAO.getInstance();
+
+		boolean IsSuccess = false;
+		try {
+			IsSuccess = dao.login(id, pw);			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		MovePage movePage = new MovePage();
+		if(IsSuccess)
+		{
+			movePage.setRedirect(true);
+			movePage.setPageName(pageName);
+		}
+		else
+		{
+			request.setAttribute("errorPage", "로그인에 실패하였습니다.");
+			movePage.setRedirect(false);
+			movePage.setPageName("error/error.jsp");
+		}
+			
+		
+		return null;
+	}
+
+}

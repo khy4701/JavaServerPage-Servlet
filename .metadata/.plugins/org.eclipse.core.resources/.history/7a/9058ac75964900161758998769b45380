@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style>
+
+  fieldset{
+    width : 300px; background-image: ./imags/thm.jpg
+  }
+
+</style>
+
+</head>
+<body>
+	<h1>입력양식 태그</h1>
+	<hr>
+	<form action="exam.jsp" method="post" >
+	<fieldset>
+	<legend>입력양식 연습</legend>
+	
+		<ul>
+			<!-- 목록을 만들어주는 태그 -->			
+			
+			<li>아이디 : <input type="text" name="id" placeholder="아이디를 입력하세요">
+			<li>비밀번호 : <input type="password" name="password" >
+			<li>이메일: <input type="email" name = "email">
+			<li>주문날짜 : <input type="date" name="date">			
+			<li>주문수량 : <input type="number" name="orderNum" step="10">
+			<li>배송방법 : <input type="radio" name="sendMethod" value="택배">택배
+				<input type="radio" name="sendMethod" value="퀵">퀵
+			<li>결제방법 : <input type="checkbox" name="payment" value="카드"> 카드			
+			         <input	type="checkbox" name="payment" value="현금"> 현금
+			         <input type="checkbox" name="payment" value="상품권"> 상품권
+	   </ul>
+		<input type="submit" value="주문">
+		<input type="reset" value="취소">
+	</fieldset>	
+	</form>
+</body>
+</html>
+

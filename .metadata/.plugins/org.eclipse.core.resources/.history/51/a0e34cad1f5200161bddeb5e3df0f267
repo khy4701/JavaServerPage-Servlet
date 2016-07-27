@@ -1,0 +1,17 @@
+package exam.vo;
+
+import java.sql.Date;
+
+public class Board {
+
+	private int num;
+	private String id;
+	private String name;
+	private String title;
+	private String content;
+	private Date writeDate;
+	private String fileName;
+	private int readCount;
+	private int downCount;
+	
+}

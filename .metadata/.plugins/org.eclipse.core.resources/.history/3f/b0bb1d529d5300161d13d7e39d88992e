@@ -1,0 +1,12 @@
+package exam.vo;
+
+public class ReplyVO {
+
+	private int num;
+	private String id;
+	private String content;
+	private Date write_date;
+	private int board_num;
+	
+	
+}

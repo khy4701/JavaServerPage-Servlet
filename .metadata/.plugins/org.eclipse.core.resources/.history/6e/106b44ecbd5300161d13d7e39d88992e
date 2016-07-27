@@ -1,0 +1,39 @@
+package exam.action;
+
+import java.io.PrintWriter;
+import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import exam.dao.ReplyDAO;
+
+public class ReplyDeleteAction implements Action {
+
+	@Override
+	public MovePage execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		String replyNum = request.getParameter("replyNum");
+		
+		ReplyDAO dao = ReplyDAO.getInstance();
+		
+		int result = 0;
+		
+		try {
+			result = dao.deleteReply(Integer.parseInt(replyNum));
+			
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+}

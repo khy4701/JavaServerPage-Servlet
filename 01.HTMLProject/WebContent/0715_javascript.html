@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- <style>
+#msg{ color : red }
+
+</style> -->
+
+<script>
+// 함수 정의
+/* 반환 함수명 (매개변수)
+{
+} */
+
+// 페이지 시작 할 경우에 호출 되는 이벤트
+window.onload = function()
+{
+	//alert("페이지 로드");
+	
+	/* 
+	// name 속성으로 접근
+	// [document - <body>] 
+	// [form_name - <form name="register" ]
+	// [input_name - rname]
+	alert( document.register.rname);	
+	console.log( document.register.rname);
+	
+	// id 속성으로 접근
+	alert(document.getElementById("rid").value);
+	console.log(document.getElementById("rid")); 
+	*/
+		
+	var r = document.getElementById("rid");
+	//console.log(r);
+	r.onclick = function(){
+		var id = document.getElementById("txtId");
+		var m = document.getElementById("msg");
+		if( id.value == "" )
+			m.innerText = "아이디를 입력하세요.";
+			//alert("아이디를 입력하세요");
+		else{
+			//alert(id.value)
+			m.innerText  = id.value;
+			
+			document.register.submit();
+		}			
+		id.focus();
+	}	
+}
+
+
+function test()
+{
+	alert("회원가입 버튼을 눌렀습니다.");
+}
+
+
+
+a.onclick = function()
+{
+	alert("회원가입 눌렸어요..");
+}
+
+
+</script>
+
+
+</head>
+<body>
+<h1>자바스크립트 테스트</h1>
+<hr>
+
+<form name="register" action="register.jsp">
+	<fieldset>
+		<legend>회원가입</legend>
+		
+		아이디 : <input type ="text" id="txtId"><span id="msg"></span><br>
+		
+<!-- 		<input type="button" value="가입" onclick="test()">
+ -->		<input type="button" value="가입" name="rname" id="rid">
+		
+		
+		<!-- name : 폼 태그에서만, 
+		     
+		 -->
+	</fieldset>
+</form>
+</body>
+</html>

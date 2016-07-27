@@ -1,0 +1,38 @@
+package exam.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import exam.dao.ReplyDAO;
+import exam.vo.ReplyVO;
+
+public class ReplyAction implements Action {
+
+	@Override
+	public MovePage execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		ReplyDAO dao = ReplyDAO.getInstance();
+		
+		System.out.println("ReplyAction");
+		
+		String id = request.getParameter("id");
+		String boardNum = request.getParameter("boardNum");
+		String content= request.getParameter("content");
+		
+		System.out.println("id :" + id);
+		System.out.println("boardNum : "+boardNum);
+		System.out.println("content : " +content);
+		
+		
+		ReplyVO reply = new ReplyVO();
+		
+		
+		
+		
+		dao.insertReply(reply)
+		
+		
+		return null;
+	}
+}

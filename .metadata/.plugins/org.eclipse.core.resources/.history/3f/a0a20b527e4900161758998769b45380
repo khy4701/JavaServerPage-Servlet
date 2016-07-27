@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>입력양식 태그</h1>
+	<hr>
+	<form action="test.jsp">
+		<ul> <!-- 목록을 만들어주는 태그 -->
+		<li> 아이디 : <input type="text" name ="id">
+		<li> 이름 : <input type="text" name ="name">
+		<li> 비밀번호 : <input type="password" name ="password">  		
+		</ul>
+		<input type="submit" value="회원가입">
+	</form>
+
+</body>
+</html>
+

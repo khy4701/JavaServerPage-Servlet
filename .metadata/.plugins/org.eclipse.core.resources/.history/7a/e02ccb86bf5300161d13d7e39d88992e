@@ -1,0 +1,162 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src= "js/jquery-3.1.0.js"></script>
+<script>
+// JQuery를 이용한 Ajax 구현
+
+$(function(){
+	
+	$("#btnSubmit").click(function(){
+		$.ajax({
+			// 보낼 URL
+			url : "reply.kitri",
+			
+			// 같이 보낼 Data
+			data : {"boardNum": $("#boardNum").val() , "id": $("#id").val() , "content": $("#content").val() },
+			
+			dataType : "json",
+			// 성공 했을 때
+			success: function(data){
+				console.log(data);
+				
+				// view.jsp의 div 태그의 아이디를 읽어서 비워버림
+				$("#list").empty();
+				
+				var str ="<table border = '1'>";
+				
+				// JQuery에서 제공하는 반복문 함수. -> Json 데이터(data)의 갯수 만큼 자동 반복함.
+				$.each(data, function(index, obj){
+					
+					str+="<tr><td>"+index+"</td>";
+					str+="<td>"+obj.id+"</td>";
+					str+="<td>"+obj.content+"</td>";
+					str+="<td>"+obj.write_date+"</td>";
+					str+="<td><input type='hidden' id= 'replyNum' value= '"+ obj.num +"''></td>";
+					str+="<td><input type='button' id= 'btnDelete' value='삭제'></td>";
+					str+="</tr>";
+				});				
+				
+				str+="</table>";
+				// append를 하게 되면, 아래에 정의된 div 태그에 추가됨
+				$("#list").append(str);
+			},
+			// 실패 했을 때
+			error : function(){
+				alert("fail");
+			}
+		});
+		
+
+		// 동적으로 만들어진 아이디를 제거 할 경우엔, 이벤트를 붙여서 수행해야함.
+		$("#list").on("click","#btnDelete",function(){
+			$.ajax({
+				// 보낼 URL
+				url : "replyDelete.kitri",
+				data : {"replyNum": $("#replyNum").val(), "boardNum": $("#boardNum").val()},
+				dataType : "json",
+				success: function(data){
+					// view.jsp의 div 태그의 아이디를 읽어서 비워버림
+					$("#list").empty();
+					
+					var str ="<table border = '1'>";
+					
+					// JQuery에서 제공하는 반복문 함수. -> Json 데이터(data)의 갯수 만큼 자동 반복함.
+					$.each(data, function(index, obj){
+						
+						str+="<tr><td>"+index+"</td>";
+						str+="<td>"+obj.id+"</td>";
+						str+="<td>"+obj.content+"</td>";
+						str+="<td>"+obj.write_date+"</td>";
+						str+="<td><input type='hidden' id= 'replyNum' value= '"+ obj.num +"''></td>";
+						str+="<td><input type='button' id= 'btnDelete' value='삭제'></td>";
+						str+="</tr>";
+					});				
+					
+					str+="</table>";
+					// append를 하게 되면, 아래에 정의된 div 태그에 추가됨
+					$("#list").append(str);
+				},
+				error : function(){
+					alert("fail");
+				}				
+			});
+			// 트리구조 
+			/*
+			   table - tr - td(1) : index 
+			                td(2) : id
+			                td(3) : content
+			                td(4) : date
+			                td(4) : 삭제 버튼
+			*/
+			// $(this) -- 삭제 버튼
+			// $(this).parent(): td(5) 
+			// $(this).parent().prev() : td(4)
+			// $(this).parent().prev().text : content			
+			console.log($(this).parent().prev().prev().prev().prev().text());
+		});
+	});
+});
+
+</script>
+
+</head>
+<body>
+
+	<h1>게시판</h1>
+	<hr>
+
+	<c:set var="content" value="${requestScope.ContentInfo}" />
+	<table border="1">
+
+		<tr>
+			<th>글 번호</th>
+			<th>작성자</th>
+			<th>제목</th>
+			<th>내용</th>
+		</tr>
+
+		<tr>
+			<td align="center">${content.num }</td>
+			<td align="center">${content.name }</td>
+			<td align="center">${content.title }</td>
+			<td align="center">${content.content }</td>
+	</table>
+
+	<fieldset>
+		<legend>댓글 </legend>
+		<form>
+
+			<!-- 세션에 저장된 아이디를 Ajax로 읽어오기 위해서 hidden 을 이용하여 id를 지정 -->
+			<input type="hidden" id="id" value="${sessionScope.id}"> <input
+				type="hidden" id="boardNum" value="${content.num}">
+
+			<ul>
+				<li>작성자 아이디 : ${content.id}</li>
+
+				<!-- name : Form 태그에서 사용, id : Ajax에서 사용 -->
+				<li>내용 <br> 
+					<textarea rows="5" cols="100" name="content" id="content"></textarea> 
+					<input type="button" value="댓글 쓰기" id="btnSubmit">
+				</li>
+			</ul>
+		</form>
+		
+		<div id="list">
+			<table border="1">
+				<tr>
+					<td>test</td>
+					<td>test</td>
+				</tr>
+			</table>
+		</div>
+	</fieldset>
+</body>
+</html>

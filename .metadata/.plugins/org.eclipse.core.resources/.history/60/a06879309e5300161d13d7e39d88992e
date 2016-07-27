@@ -1,0 +1,43 @@
+package exam.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
+
+import exam.util.DBManager;
+import exam.vo.ReplyVO;
+
+public class ReplyDAO {
+
+	public static ReplyDAO dao = new ReplyDAO();
+	
+	public static ReplyDAO getInstance()
+	{
+		return dao;
+	}
+	
+	public int insertReply(ReplyVO reply) throws SQLException
+	{
+		int result = 0;
+		
+		Connection con = DBManager.getConnetion();
+		String sql = " insert into reply values(reply_seq.nextval,?,?,default,?)";
+		
+		PreparedStatement psmt = con.prepareStatement(sql);
+		
+		psmt.setString(1, reply.getId());
+		psmt.setString(2, reply.getContent());
+		psmt.setInt(3, reply.getBoard_num());
+		
+		
+		psmt.executeUpdate();
+		
+		return 0;
+	}
+	
+	public List<ReplyVO> selectAll(int boardNum)
+	{
+		return null;
+	}
+}

@@ -1,0 +1,49 @@
+package exam.action;
+
+import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import exam.dao.BoardDAO;
+import exam.vo.BoardVO;
+
+public class ViewAction implements Action {
+
+	@Override
+	public MovePage execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		BoardDAO dao = BoardDAO.getInstance();		
+		String board_id = request.getParameter("id");				
+		
+		
+		BoardVO content =null;
+		
+		try {
+			content = dao.selectByNum(Integer.parseInt(board_id));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		MovePage movePage = new MovePage();
+		if( content != null)
+		{
+			request.setAttribute("ContentInfo", content);
+			movePage.setRedirect(false);
+			movePage.setPageName("View.jsp");
+		}
+		else
+		{
+			request.setAttribute("errorMsg", "세부 보기 실패하였습니다");
+			movePage.setRedirect(false);
+			movePage.setPageName("error/error.jsp");
+		}
+		return movePage;
+	}
+
+}

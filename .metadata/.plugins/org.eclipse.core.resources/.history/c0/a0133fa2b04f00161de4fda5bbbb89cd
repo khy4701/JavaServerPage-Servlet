@@ -1,0 +1,7 @@
+package exam.action;
+
+public class MovePage {
+
+	private String pageName;    // 이동 페이지 이름
+	private boolean isRedirect; // True : Redirect , False : Foward
+}

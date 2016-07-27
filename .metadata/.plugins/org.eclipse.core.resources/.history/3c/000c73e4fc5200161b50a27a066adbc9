@@ -1,0 +1,74 @@
+package exam.action;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import exam.dao.BoardDAO;
+
+public class DownAction implements Action {
+
+	@Override
+	public MovePage execute(HttpServletRequest request, HttpServletResponse response)  {
+		MovePage movePage = null;
+		// 1. �슂泥� �뙆�씪誘명꽣 泥섎━
+		int selectNum = Integer.parseInt((String)request.getParameter("num"));
+		String fileName = (String)request.getParameter("filename");
+	
+		try {
+			response.setHeader("content-Disposition", "attachment; filename="+ 
+										new String(fileName.getBytes("UTF-8"), "8859_1"));   // �떎�슫濡쒕뱶瑜� �뿤�뜑�뿉 遺숈엫(�샃�뀡�룄 異붽�)
+						
+			String path = request.getServletContext().getRealPath("upload");
+			
+			InputStream is = new FileInputStream(path + "\\"+ fileName);
+			ServletOutputStream sos = response.getOutputStream();
+			
+			byte readByte[] = new byte[64];			
+			while((is.read(readByte)) != -1){
+				sos.write(readByte);				
+			}
+			sos.close();
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
+		// 2. DB 泥섎━		
+		int result = 0;
+		try{
+			BoardDAO dao = BoardDAO.getInstance();
+			result = dao.updateByNum(selectNum);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}		
+		
+		// 3. �씠�룞�븷 �럹�씠吏� �꽕�젙
+		movePage = new MovePage();
+		if(result != 0){	// �꽦怨�			
+			movePage.setPageName("view.board");
+			movePage.setRedirect(true);
+		}		
+		else{	// �떎�뙣
+			request.setAttribute("errorMsg", "�뜲�씠�꽣 �긽�꽭議고쉶 諛� 議고쉶�닔 利앷��뿉 �떎�뙣�븯���뒿�땲�떎.");
+			movePage.setPageName("error/error.jsp");				
+			movePage.setRedirect(false);			
+		}
+		
+		return movePage;
+	}
+
+}

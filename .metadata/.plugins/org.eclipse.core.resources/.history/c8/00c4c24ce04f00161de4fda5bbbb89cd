@@ -1,0 +1,51 @@
+package exam.action;
+
+import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import exam.dao.MemberDAO;
+
+public class LoginAction implements Action {
+
+	@Override
+	public MovePage execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		System.out.println("LoginAction");
+		
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pwd");
+		
+		MemberDAO dao = MemberDAO.getInstance();
+
+		boolean IsSuccess = false;
+		try {
+			IsSuccess = dao.login(id, pw);			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		MovePage movePage = new MovePage();
+		if(IsSuccess)
+		{
+			System.out.println("로그인에 성공하였습니다. ");
+			HttpSession session = request.getSession();
+			session.setAttribute("id", id);			
+			
+			movePage.setRedirect(true);
+			movePage.setPageName("list.kitri");
+		}
+		else
+		{
+			request.setAttribute("errorMsg", "로그인에 실패하였습니다. 아이디와 비밀번호를 확인하세요");
+			movePage.setRedirect(false);
+			movePage.setPageName("error/error.jsp");
+		}
+		
+		return movePage;
+	}
+
+}

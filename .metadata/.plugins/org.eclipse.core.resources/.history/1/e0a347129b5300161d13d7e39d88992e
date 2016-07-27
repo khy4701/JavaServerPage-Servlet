@@ -1,0 +1,21 @@
+package exam.dao;
+
+public class ReplyDAO {
+
+	public static ReplyDAO dao = new ReplyDAO();
+	
+	public static ReplyDAO getInstance()
+	{
+		return dao;
+	}
+	
+	public int insertReply(ReplyVO reply)
+	{
+		
+	}
+	
+	public List<ReplyVO> selectAll(int boardNum)
+	{
+		return null;
+	}
+}

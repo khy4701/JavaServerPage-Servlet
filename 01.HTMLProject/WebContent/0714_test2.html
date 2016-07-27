@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- 줄 삽입 -->
+<hr> 
+
+<!-- 이미지 삽입 -->
+<img src = "./images/thm.jpg"> 
+
+<!-- 링크 삽입  -->
+<a href ="http://www.naver.com">네이버</a>
+<a href ="./images/links/test.html">gotest_html1</a>
+
+<!-- 띄어 쓰기 삽입 -->
+<br> <br> <br>
+
+<!-- 블럭 단위 태그 -->
+1. 블럭 태그  : 한 줄 전체. <div> 안녕하세요.</div>gg
+
+<!-- 인라인 단위 태그 -->
+2. 인라인 태그 : 자신의 영역 안에서만. <span> 안녕하세요.</span> gg
+
+<!-- 테이블 제목(th), 행(tr)과 열(td) -->
+	<table border="1" width = "500">	
+	    <tr> 
+	    	<th>제목</th>
+	    	<th>제목2</th>
+	    </tr>
+		<tr>
+			<!-- 열을 2개 이상 사용 할 경우: colspan  속성-->
+			<td colspan = "2">셀1</td>			
+		</tr>
+		
+		<tr>
+			<!-- 행을 2개 이상 사용 할 경우: rowspan  속성-->
+			<td rowspan="2">셀1</td>
+			<td>셀2</td>
+		</tr>		
+		
+		<tr>
+		     <!-- 	<td>셀1</td> : rowspan이 있기 때문에 삭제-->
+			<td>셀2</td>
+		</tr>
+	</table>
+</body>
+</html>

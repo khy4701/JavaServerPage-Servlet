@@ -1,0 +1,45 @@
+package exam.action;
+
+import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import exam.dao.BoardDAO;
+import exam.vo.BoardVO;
+
+public class ViewAction implements Action {
+
+	@Override
+	public MovePage execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		BoardDAO dao = BoardDAO.getInstance();
+		
+		String board_id = request.getParameter("id");
+		
+				
+		MovePage movePage = new MovePage();
+		
+		BoardVO member =null;
+		
+		try {
+			member = dao.selectByNum(Integer.parseInt(board_id));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if( member != null)
+		{
+			movePage.setRedirect(true);
+			movePage.setPageName("View.jsp");
+		}
+		
+		return movePage;
+	}
+
+}

@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>exam.jsp</h1>
+	<hr>
+
+	<%
+		/* JSP 인코딩  */
+		request.setCharacterEncoding("UTF-8");
+
+		/* JSP Code */
+		/* 생성 하지 않아도 자동으로 만들어진 내장 객체 request */
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String pw = request.getParameter("password");
+		String color = request.getParameter("color");
+		String gender = request.getParameter("gender");
+		String []hobby = request.getParameterValues("hobby");
+
+		out.print(id + "<br>"); /*  JSP Code와 HTML 코드 연동  */
+		out.print(name+ "<br>");
+		out.print(pw+ "<br>");
+		out.print(gender+ "<br>");
+		out.print("<font color = '" + color + "'>좋아하는색</font>");
+		
+		if(hobby != null){
+		    out.print(hobby.length);
+		    out.print(hobby[0]);
+		}
+		else 
+		    out.print("취미를 선택하지 않음");
+		
+	%>
+	<font color ="<% out.print(color); %>">좋아하는 색</font>  <!-- HTML에 JSP 삽입하기1 -->
+<font color ="<%= color %>">좋아하는 색</font>   <!-- HTML에 JSP 삽입하기2 -->
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ page import="exam.beans.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+	Map<Product, Integer> hashMap =(Map<Product, Integer>)session.getAttribute("menu");
+  
+    out.println("<h1>Menu List</h1> <hr>");
+    
+    Set<Map.Entry<Product,Integer>> set = hashMap.entrySet();    
+    Iterator<Map.Entry<Product,Integer>> it = set.iterator();
+    
+    out.print("<table>");
+    while(it.hasNext())
+    {
+    	out.print("<td>");
+    	Map.Entry<Product, Integer> e = (Map.Entry<Product, Integer>)it.next();
+    	Product product = e.getKey();
+    	
+    	out.print("");
+    	out.print("<tr>코드번호 : "+ product.getCode() + "</tr>");
+    	out.print("<tr>가격 : "+ product.getPrice() + "</tr>");
+    	out.print("<tr>상품명 : "+ product.getPro_name() + "</tr>");
+    	out.print("<tr>개수 : " + e.getValue() + "</tr></td>" );    	   	
+    }
+    out.print("</table>");
+    if(hashMap.isEmpty())
+    	out.println("장바구니가 비었습니다.<br>");
+    
+    out.println("<a href = \"menu.jsp\"</a> Menu로");
+%>
+</body>
+</html>

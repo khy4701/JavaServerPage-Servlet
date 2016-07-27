@@ -1,0 +1,41 @@
+package exam.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import exam.dao.BoardDAO;
+import exam.vo.BoardVO;
+
+public class WriteAction implements Action {
+
+	@Override
+	public MovePage execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		BoardDAO dao = BoardDAO.getInstance();
+		
+		String id = request.getParameter("id");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String fileName = request.getParameter("fileName");
+		
+		BoardVO vo = new BoardVO();
+		
+		vo.setId(id);
+		vo.setTitle(title);
+		vo.setContent(content);
+		vo.setFileName(fileName);
+				
+		if( dao.insertBoard(vo) == 1)
+		{
+			
+			movePage.setRedirect(false);
+			movePage.setPageName("List.jsp");
+		}
+		
+		
+		
+		return null;
+	}
+
+}

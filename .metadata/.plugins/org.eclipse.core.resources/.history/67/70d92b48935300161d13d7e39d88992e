@@ -1,0 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>게시판</h1>
+<hr>
+
+<c:set var ="content" value= "${requestScope.ContentInfo}"/>
+<table border ="1">
+
+<tr><th> 글 번호 </th> <th> 작성 아이디</th><th>작성자 </th> <th> 제목</th>
+<th>내용 </th> <th>작성 일자</th> <th>파일 이름</th> <th>조회 수</th> <th> 다운로드 수</th> </tr>
+	
+    <tr><td> ${content.num }        </td>
+    <td align ="center"> ${content.id }  			</td>
+    <td align ="center"> ${content.name }			</td>
+    <td align ="center"> ${content.title }  		</td>    
+    <td align ="center"> ${content.content }  	  	</td>
+    <td align ="center"> ${content.writeDate }   	</td>
+    <td align ="center"> ${content.fileName }   	</td>
+    <td align ="center"> ${content.readCount }  	</td>
+    <td align ="center"> ${content.downCount } 		</td></tr>
+    
+</table>
+
+<fieldset>
+	<legend>댓글 </legend>
+		<ul>
+			<li>작성자 아이디 : ${content.id} <input type="button" value="댓글 쓰기"> </li>
+			<li>내용 : <textarea rows="10" cols="30" name="content"></textarea></li></li>
+		</ul>
+</fieldset>
+
+</body>
+</html>

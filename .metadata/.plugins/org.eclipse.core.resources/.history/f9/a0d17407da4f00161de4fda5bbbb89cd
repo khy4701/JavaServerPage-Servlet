@@ -1,0 +1,60 @@
+package exam.action;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import exam.dao.MemberDAO;
+import exam.vo.MemberVO;
+
+public class ListAction implements Action {
+
+	@Override
+	public MovePage execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		MemberDAO dao = MemberDAO.getInstance();
+		
+		HttpSession session = request.getSession();		
+		String id = (String)session.getAttribute("id");
+		
+		ArrayList<MemberVO> arrayList = null;
+
+		MovePage movePage = null;
+		System.out.println("id : "+id);
+		if( id.toUpperCase().equals("ADMIN"))
+		{
+			try {	
+				arrayList = dao.selectAll();					
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			movePage = new MovePage();
+			if( arrayList!= null)
+			{
+				System.out.println("출력 성공");
+				session.setAttribute("ArrayList", arrayList);
+				movePage.setRedirect(true);
+				movePage.setPageName("List.jsp");
+			}
+		}
+		else
+		{
+			
+		}
+				
+		
+		
+		
+				
+		return movePage;
+	}
+
+}

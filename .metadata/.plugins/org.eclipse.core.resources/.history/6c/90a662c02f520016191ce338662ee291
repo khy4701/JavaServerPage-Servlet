@@ -1,0 +1,27 @@
+package exam.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import exam.dao.BoardDAO;
+
+public class ViewAction implements Action {
+
+	@Override
+	public MovePage execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		BoardDAO dao = BoardDAO.getInstance();
+		
+		
+		
+		
+		
+		MovePage movePage = new MovePage();
+		
+		
+		
+		return movePage;
+	}
+
+}

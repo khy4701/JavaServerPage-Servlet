@@ -1,0 +1,10 @@
+package exam.util;
+
+public class DBManager {
+
+	// ¿¬°á
+	public Connection getConnetion()
+	{
+		
+	}
+}

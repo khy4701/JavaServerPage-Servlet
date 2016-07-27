@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src="jquery-3.1.0.min.js"></script>
+<script>
+$(document).ready(function(){
+	alert("문서가 준비되었습니다.");
+});
+/* jquery(document).ready(function(){}); 
+ * winload.~와 동시에 호출시  가장 먼저 호출됨.
+ */
+</script>
+
+</head>
+<body>
+
+<h1>자바스크립트 테스트</h1>
+<hr>
+
+<form name="register" action="register.jsp">
+	<fieldset>
+		<legend>회원가입</legend>
+		
+		아이디 : <input type ="text" id="txtId"><span id="msg"></span><br>
+		
+<!-- 		<input type="button" value="가입" onclick="test()">
+ -->		<input type="button" value="가입" name="rname" id="rid">
+		
+		
+		<!-- name : 폼 태그에서만, 
+		     
+		 -->
+	</fieldset>
+</form>
+
+</body>
+</html>

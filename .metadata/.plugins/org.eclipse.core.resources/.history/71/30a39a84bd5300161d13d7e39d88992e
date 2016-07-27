@@ -1,0 +1,24 @@
+package exam.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import exam.dao.ReplyDAO;
+
+public class ReplyDeleteAction implements Action {
+
+	@Override
+	public MovePage execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		//int number = request.getParameter("");
+		ReplyDAO dao = ReplyDAO.getInstance();
+		
+		
+		
+		//dao.deleteReply(number);
+		
+		return null;
+	}
+
+}

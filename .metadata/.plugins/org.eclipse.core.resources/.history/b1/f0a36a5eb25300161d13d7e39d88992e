@@ -1,0 +1,105 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src= "js/jquery-3.1.0.js"></script>
+<script>
+// JQuery를 이용한 Ajax 구현
+
+$(function(){
+	
+	$("#btnSubmit").click(function(){
+		$.ajax({
+			// 보낼 URL
+			url : "reply.kitri",
+			
+			// 같이 보낼 Data
+			data : {"boardNum": $("#boardNum").val() , "id": $("#id").val() , "content": $("#content").val() },
+			
+			dataType : "json",
+			// 성공 했을 때
+			success: function(data){
+				alert("success");
+				console.log(data);
+				
+				// view.jsp의 div 태그의 아이디를 읽어서 비워버림
+				$("#list").empty();
+				
+				var str ="<table border = '1'>";
+				
+				$.each(data, function(){
+					
+				});				
+				
+				str+="</table>";
+				$("#list").append(str);
+			},
+			// 실패 했을 때
+			error : function(){
+				alert("fail");
+			}
+		});
+	});
+});
+
+</script>
+
+</head>
+<body>
+
+	<h1>게시판</h1>
+	<hr>
+
+	<c:set var="content" value="${requestScope.ContentInfo}" />
+	<table border="1">
+
+		<tr>
+			<th>글 번호</th>
+			<th>작성자</th>
+			<th>제목</th>
+			<th>내용</th>
+		</tr>
+
+		<tr>
+			<td align="center">${content.num }</td>
+			<td align="center">${content.name }</td>
+			<td align="center">${content.title }</td>
+			<td align="center">${content.content }</td>
+	</table>
+
+	<fieldset>
+		<legend>댓글 </legend>
+		<form>
+
+			<!-- 세션에 저장된 아이디를 Ajax로 읽어오기 위해서 hidden 을 이용하여 id를 지정 -->
+			<input type="hidden" id="id" value="${sessionScope.id}"> <input
+				type="hidden" id="boardNum" value="${content.num}">
+
+			<ul>
+				<li>작성자 아이디 : ${content.id}</li>
+
+				<!-- name : Form 태그에서 사용, id : Ajax에서 사용 -->
+				<li>내용 <br> 
+					<textarea rows="5" cols="100" name="content" id="content"></textarea> 
+					<input type="button" value="댓글 쓰기" id="btnSubmit">
+				</li>
+			</ul>
+		</form>
+		
+		<div id="list">
+			<table border="1">
+				<tr>
+					<td>test</td>
+					<td>test</td>
+				</tr>
+			</table>
+		</div>
+	</fieldset>
+</body>
+</html>

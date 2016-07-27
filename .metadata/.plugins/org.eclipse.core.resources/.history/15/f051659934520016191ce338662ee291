@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<c:set var ="content" value= "${requestScope.ContentInfo}"/>
+<table border ="1">
+
+<tr><th> 글 번호 </th> <th> 작성 아이디</th> <th> 제목</th>
+<th>내용 </th> <th>작성 일자</th> <th>파일 이름</th> <th>조회 수</th> <th> 다운로드 수</th> </tr>
+	
+    <tr><td> 게시 번호 </td> <td> ${content.num }        </td></tr>
+    <tr><td> 아이디	 </td> <td> ${content.id }  </td></tr>
+    <tr><td> 제목	 </td> <td> ${content.title }  </td></tr>    
+    <tr><td> 내용	 </td> <td> ${content.content }  	  </td></tr>
+    <tr><td> 작성 일자 </td> <td> ${content.writeDate }   </td></tr>
+    <tr><td> 파일 이름  </td> <td> ${content.fileName }   </td></tr>
+    <tr><td> 조회 수  </td> <td> ${content.readCount }   </td></tr>
+    <tr><td> 다운로드 수  </td> <td> ${content.downCount }   </td></tr>
+    
+</table>
+
+</body>
+</html>

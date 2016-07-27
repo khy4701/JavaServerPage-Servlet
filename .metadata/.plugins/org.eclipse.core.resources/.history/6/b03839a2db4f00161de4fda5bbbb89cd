@@ -1,0 +1,144 @@
+package exam.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import exam.util.DBManager;
+import exam.vo.MemberVO;
+
+public class MemberDAO {
+
+	//Singleton Pattern
+	private static MemberDAO dao = new MemberDAO();
+	
+	private MemberDAO()
+	{
+	}
+	
+	public static MemberDAO getInstance()
+	{
+		return dao;
+	}
+	
+	public int insertMember(MemberVO member) throws SQLException
+	{
+		System.out.println("MemberDAO - insertMember()");
+		Connection con = DBManager.getConnetion();	
+		PreparedStatement psmt = null;
+		
+		// 마지막 날짜는 Default로 정의한 값으로 넣어줌
+		String sql = "insert into member values(?,?,?,?,?,?,default)";
+		int result = 0;
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			
+			psmt.setString(1, member.getId());
+			psmt.setString(2, member.getPw());
+			psmt.setString(3, member.getUserName());
+			psmt.setInt(4, member.getAge());
+			psmt.setString(5, member.getAddress());
+			psmt.setString(6, member.getPhoneNum());
+
+			result = psmt.executeUpdate();		
+		} finally{
+			DBManager.close(con, psmt);
+			
+		}			
+		return result;
+	}
+	
+	public boolean login(String id, String pw) throws SQLException
+	{
+		System.out.println("MemberDAO - loginMember()");
+		
+		Connection con = DBManager.getConnetion();	
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		// 마지막 날짜는 Default로 정의한 값으로 넣어줌
+		String sql = "select * from member where id = ? and pwd = ?";
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			
+			psmt.setString(1,id);
+			psmt.setString(2,pw);			
+
+			rs = psmt.executeQuery();
+		
+			if( rs.next())
+				return true;			
+			
+		} finally{
+			DBManager.close(con, psmt,rs);			
+		}
+			
+		return false;
+	}
+	
+	public ArrayList<MemberVO> selectAll() throws SQLException
+	{
+		System.out.println("MemberDAO - selectAll()");
+		
+		Connection con = DBManager.getConnetion();	
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<MemberVO> arrayList = new ArrayList<MemberVO>();
+		
+		String sql = " select * from member";
+		psmt = con.prepareStatement(sql);
+		
+		rs = psmt.executeQuery();
+		
+		while(rs.next())
+		{
+			MemberVO member = new MemberVO();
+			member.setId(rs.getString("id"));
+			member.setPw(rs.getString("pwd"));
+			member.setAge(rs.getInt("age"));
+			member.setUserName(rs.getString("name"));
+			member.setAddress(rs.getString("addr"));
+			member.setPhoneNum(rs.getString("tel"));							
+			member.setRegDate(rs.getDate("reg_date"));
+			arrayList.add(member);
+		}
+		
+		return arrayList;
+	}
+	
+	public MemberVO selectInfo(String id)
+	{
+		String sql = "select * from member where id = ?";
+		PreparedStatement psmt;
+		Connection con = DBManager.getConnetion();	
+		MemberVO member = new MemberVO();
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();						
+			
+			if( rs.next())
+			{
+				member.setId(rs.getString("id"));
+				member.setPw(rs.getString("pwd"));
+				member.setAge(rs.getInt("age"));
+				member.setUserName(rs.getString("name"));
+				member.setAddress(rs.getString("addr"));
+				member.setPhoneNum(rs.getString("tel"));							
+				member.setRegDate(rs.getDate("reg_date"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return member;
+	}
+	
+}

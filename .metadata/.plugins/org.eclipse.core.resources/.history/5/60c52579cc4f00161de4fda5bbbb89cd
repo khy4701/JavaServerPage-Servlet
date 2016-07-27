@@ -1,0 +1,45 @@
+package exam.action;
+
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import exam.dao.MemberDAO;
+import exam.vo.MemberVO;
+
+public class RegisterAction implements Action{
+
+	@Override
+	public MovePage execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		System.out.println("RegisterAction");
+		
+		// 1. 요청 파라미터 처리
+		MemberVO member = null;
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		String userName = request.getParameter("userName");
+		String age = request.getParameter("age");
+		String phoneNum = request.getParameter("phoneNum");
+		String address = request.getParameter("address");
+		
+		// 2. DB 처리
+		MemberDAO dao = MemberDAO.getInstance();
+		
+		dao.insertMember(member);
+		
+		// 3. 다음 페이지 이동
+		
+		
+		return null;
+	}
+
+}

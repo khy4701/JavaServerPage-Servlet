@@ -1,0 +1,15 @@
+package exam.util;
+
+import java.sql.Connection;
+
+public class DBManager {
+
+	// ¿¬°á
+	public Connection getConnetion()
+	{
+		Connection con = null;
+		
+		return con;
+		
+	}
+}

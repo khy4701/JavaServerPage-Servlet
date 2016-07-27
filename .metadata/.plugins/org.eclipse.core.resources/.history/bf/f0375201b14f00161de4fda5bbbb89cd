@@ -1,0 +1,6 @@
+package exam.action;
+
+public class RegisterAction implements Action{
+
+	
+}

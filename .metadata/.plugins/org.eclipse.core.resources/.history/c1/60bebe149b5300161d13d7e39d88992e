@@ -1,0 +1,25 @@
+package exam.dao;
+
+import java.util.List;
+
+import exam.vo.ReplyVO;
+
+public class ReplyDAO {
+
+	public static ReplyDAO dao = new ReplyDAO();
+	
+	public static ReplyDAO getInstance()
+	{
+		return dao;
+	}
+	
+	public int insertReply(ReplyVO reply)
+	{
+		
+	}
+	
+	public List<ReplyVO> selectAll(int boardNum)
+	{
+		return null;
+	}
+}

@@ -1,0 +1,40 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ page import="exam.beans.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+ <%
+    String menu = request.getParameter("menu");
+    Map<Product, Integer> hashmap = null;
+       
+    if( (hashmap= (Map<Product, Integer>) session.getAttribute("menu")) == null)
+    {
+    	hashmap = new HashMap<>();  
+    }
+   
+    if( menu != null )
+    {
+    	if( hashmap.containsKey(menu))
+    	{
+    		int number = hashmap.get(menu);
+    		hashmap.put(menu, hashmap.get(menu)+1);
+    		//hashmap.replace(menu, number+1);
+    	}
+    	else
+    		hashmap.put(menu,1);
+    	
+    	
+    }
+    session.setAttribute("menu", hashmap);
+    response.sendRedirect("listCart.jsp");
+ %>
+
+</body>
+</html>

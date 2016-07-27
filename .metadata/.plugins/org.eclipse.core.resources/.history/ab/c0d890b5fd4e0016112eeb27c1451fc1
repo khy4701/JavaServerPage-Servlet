@@ -1,0 +1,11 @@
+package exam.dao;
+
+public class MemberVO {
+
+	String id ;
+	String pw;
+	String userName;
+	String age;
+	String phoneNum ;
+	String address;
+}

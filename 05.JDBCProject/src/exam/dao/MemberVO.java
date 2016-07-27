@@ -1,0 +1,86 @@
+package exam.dao;
+
+import java.sql.Date;
+
+public class MemberVO {
+	private String id ;
+	private String pw;
+	private String userName;
+	private int age;
+	private String phoneNum ;
+	private String address;
+	
+
+	private Date regDate;
+	
+	public MemberVO()
+	{
+		
+	}
+	
+	public MemberVO(String id, String pw, String userName, int age, String phoneNum, String address) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.userName = userName;
+		this.age = age;
+		this.phoneNum = phoneNum;
+		this.address = address;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPw() {
+		return pw;
+	}
+
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getPhoneNum() {
+		return phoneNum;
+	}
+
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+}

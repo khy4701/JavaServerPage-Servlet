@@ -1,0 +1,40 @@
+<%@page import="exam.vo.MemberVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<c:set var ="member" value= "${requestScope.member}"/>
+<table border ="1">
+    	<tr><td> Id		 </td> <td> ${requestScope.memberInfo.id }        </td></tr>
+    	<tr><td> Name	 </td> <td> ${requestScope.memberInfo.userName }  </td></tr>
+    	<tr><td> Tel	 </td> <td> ${requestScope.memberInfo.phoneNum }  </td></tr>    
+    	<tr><td> Age	 </td> <td> ${requestScope.memberInfo.age }  	  </td></tr>
+    	<tr><td> Address </td> <td> ${requestScope.memberInfo.address }   </td></tr>
+    	<tr><td> Date	 </td> <td> ${requestScope.memberInfo.regDate }   </td></tr>    	
+</table>
+
+
+<%-- <%
+   MemberVO member = (MemberVO)request.getAttribute("memberInfo");
+
+%>
+ --%>
+<%-- <table border ="1">
+    	<tr><td> Id		 </td> <td> <%=member.getId() %>  </td></tr>
+    	<tr><td> Password</td> <td> <%=member.getPw() %>  </td></tr>
+    	<tr><td> Name	 </td> <td> <%=member.getUserName() %>  </td></tr>
+    	<tr><td> Age	 </td> <td> <%=member.getAge() %>  </td></tr>
+    	<tr><td> Address </td> <td> <%=member.getAddress() %>  </td></tr>
+    	<tr><td> Date	 </td> <td> <%=member.getRegDate() %>  </td></tr>    	
+</table> --%>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+#URL MAPPING INFOMATION
+#url=action class
+list.kitri=exam.action.ListAction
+write.kitri=exam.action.WriteAction
+view.kitri=exam.action.ViewAction
+login.kitri=exam.action.LoginAction

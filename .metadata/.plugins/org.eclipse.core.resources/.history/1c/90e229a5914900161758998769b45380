@@ -1,0 +1,77 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>exam.jsp</h1>
+	<hr>
+	
+	<%
+		/* JSP 인코딩  */
+		request.setCharacterEncoding("UTF-8");
+
+		/* JSP Code */
+		/* 생성 하지 않아도 자동으로 만들어진 내장 객체 request */
+		String id = request.getParameter("id");
+		String email = request.getParameter("email");
+		String pw = request.getParameter("password");
+		String date = request.getParameter("date");
+		String orderNum = request.getParameter("orderNum");
+		String sendMethod = request.getParameter("sendMethod");
+		String []payment = request.getParameterValues("payment");
+    %>
+    
+    <table border="1"> 
+    	<tr>
+    	 <th> 아이디  </th>    	 
+    	 <td> <% out.print(id); %> </td>
+    	</tr>    
+    	
+    	<tr>
+    	 <th> 비밀번호  </th>   
+    	 <td> <% out.print(pw); %> </td> 	 
+    	</tr>  
+    	
+    	<tr>
+    	 <th> 이메일  </th>   
+    	 <td> <% out.print(email); %> </td> 	 
+    	</tr>  
+    	
+    	<tr>
+    	 <th> 주문날짜  </th>    	
+    	 <td> <% out.print(date); %> </td> 
+    	</tr>  		
+    	
+    	<tr>
+    	 <th> 주문수량  </th>    	 
+    	 <td> <% out.print(orderNum); %> </td>
+    	</tr>  
+    	
+    	<tr>
+    	 <th> 배송방법  </th>   
+    	 <td> <% out.print(sendMethod); %> </td> 	 
+    	</tr>
+
+		<tr>
+			<th>결제방법</th>
+			<td>
+				<%
+					if (payment != null) {
+						for (int i = 0; i < payment.length; i++)
+							out.print(payment[i] + "<br>");
+					} else
+						out.print("취미를 선택하지 않음");
+				%>
+			</td>
+		</tr>		
+	</table>
+	
+<%-- 	<font color ="<% out.print(color); %>">좋아하는 색</font>  <!-- HTML에 JSP 삽입하기1 -->
+<font color ="<%= color %>">좋아하는 색</font>   <!-- HTML에 JSP 삽입하기2 --> --%>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+package exam.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class ReplyAction implements Action {
+
+	@Override
+	public MovePage execute(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("ReplyAction");
+		
+		String id = request.getParameter("id");
+		String boardNum = request.getParameter("boardNum");
+		String content_id = request.getParameter("content");
+		
+		System.out.println("id :" + id);
+		System.out.println("boardNum : "+boardNum);
+		System.out.println("content_id : " +content_id);
+		
+		
+		return null;
+	}
+}

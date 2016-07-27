@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<c:if test ="${sessionScope.id != null }">
+	<a href ="LoginForm.jsp">글쓰기</a>	
+</c:if>
+
+<table border="1">
+<tr><th>글 번호</th><th>작성 아이디</th><th>제목</th><th>작성일</th> 
+ <c:forEach var="component" items="${ requestScope.BoardList }">
+   <tr><td><a href="view.board?id=${component.num}">${component.num}</a></td></tr>
+   <tr><td><a href="view.board?id=${component.id}">${component.id}</a></td></tr>
+   <tr><td><a href="view.board?id=${component.title}">${component.title}</a></td></tr>
+   <tr><td>${component.writeDate}</a></td></tr>   
+ </c:forEach>
+ </table>
+
+</body>
+</html>

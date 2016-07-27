@@ -1,0 +1,78 @@
+package exam.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import exam.util.DBManager;
+import exam.vo.MemberVO;
+
+public class MemberDAO {
+
+	//Singleton Pattern
+	private static MemberDAO dao = new MemberDAO();
+	
+	private MemberDAO()
+	{
+	}
+	
+	public static MemberDAO getInstance()
+	{
+		return dao;
+	}
+	
+	public int insertMember(MemberVO member) throws SQLException
+	{
+		System.out.println("MemberDAO - insertMember()");
+		Connection con = DBManager.getConnetion();	
+		PreparedStatement psmt = null;
+		
+		// 마지막 날짜는 Default로 정의한 값으로 넣어줌
+		String sql = "insert into member values(?,?,?,?,?,?,default)";
+		int result = 0;
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			
+			psmt.setString(1, member.getId());
+			psmt.setString(2, member.getPw());
+			psmt.setString(3, member.getUserName());
+			psmt.setInt(4, member.getAge());
+			psmt.setString(5, member.getAddress());
+			psmt.setString(6, member.getPhoneNum());
+
+			result = psmt.executeUpdate();		
+		} finally{
+			DBManager.close(con, psmt);
+			
+		}			
+		return result;
+	}
+	
+	public int login(String id, String pw) throws SQLException
+	{
+		System.out.println("MemberDAO - loginMember()");
+		
+		Connection con = DBManager.getConnetion();	
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		// 마지막 날짜는 Default로 정의한 값으로 넣어줌
+		String sql = "select * from member where id = ? and pwd = ?";
+		int result = 0;
+		
+		try {
+			psmt = con.prepareStatement(sql);
+			
+			psmt.setString(1,id);
+			psmt.setString(2,pw);			
+
+			 = psmt.executeQuery();
+		
+		} finally{
+			DBManager.close(con, psmt);			
+		}
+			
+		return result;
+	}
+	
+}

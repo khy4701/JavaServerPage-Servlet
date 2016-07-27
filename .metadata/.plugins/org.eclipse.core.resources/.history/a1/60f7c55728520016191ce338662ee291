@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<fieldset>
+	<legend>게시판 글쓰기</legend>
+	<ul>
+		<li> 제목 : <input type="text"></li>
+		<li> 내용 : <input type="text"></li>
+		<li> 파일명: <input type="text"></li>
+	</ul>
+</fieldset>
+제목, 내용, 파일명
+
+</body>
+</html>
